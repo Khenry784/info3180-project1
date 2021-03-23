@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+
+<div class="container">
+    <div class="row">
+        {%for project1 in project1  %}
+        <div class="col-md-3 mt-3">
+            <div class="card">
+                <img src="{{url_for('static', filename='uploads/')}}" alt="{{project1.title}}"class="card-img-top"height="200">
+                <div class="card-body">
+                    <h5 class="text-center">{{project1.title}}</h5>
+                    <p class="text-left btn btn-sm btn-primary">Price ${{project1.price}}</p>
+                </div>
+                <div class="card-footer">
+                <a href="#" class="float-left btn btn-sm btn-primary">View Property</a>
+                
+            </div>
+
+            </div>
+            
+        </div>
+        {%endfor%}
+    </div>
+</div>
+{% endblock %}

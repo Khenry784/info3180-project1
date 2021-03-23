@@ -4,9 +4,12 @@ Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
 Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
-
-from app import app
-from flask import render_template, request, redirect, url_for
+import os
+from app import app,db
+from flask import render_template, request, redirect, url_for, flash, session, abort,send_from_directory
+from app.forms import AddPropertyForm
+from werkzeug.utils import secure_filename
+from app.models import AddProperty
 
 
 ###
@@ -24,7 +27,42 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/Property', methods=["GET", "POST"] )
+def Property():
+    """Render website's add Property page."""
+    form= AddPropertyForm()
+    all_data=AddProperty.query.all()
 
+    if request.method=='POST':
+        if form.validate_on_submit():
+            title= request.form['title']
+            description=request.form['description']
+            No_Rooms=request.form['No_Rooms']
+            No_bathrooms= request.form['No_bathrooms']
+            price= request.form['price']
+            property_type = request.form['property_type']
+            location=request.form['location']
+            
+            photo=request.form['photo']
+           
+
+
+            Property = AddProperty(title=title,description=description,No_Rooms=No_Rooms,No_bathrooms=No_bathrooms,price=price,property_type=property_type,location=location,photo=photo)
+
+            db.session.add(Property)
+            db.session.commit()
+
+            flash('Property added', 'success')
+        return redirect(url_for('home'))
+    return render_template('Property.html',form=form, project1 = all_data)
+
+
+@app.route('/properties')
+def properties():
+    """Render the website's display properties page."""
+    all_data= AddProperty.query.all()
+
+    return render_template('properties.html',project1= all_data)
 ###
 # The functions below should be applicable to all Flask apps.
 ###
