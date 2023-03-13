@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block css %} 
+    <link rel="stylesheet" href="/static/css/app.css">
+{% endblock%}
+
+{% block main %}
+<div>
+    <h1>Add New Property</h1>
+    <div class="form-container">
+        <form method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <div class="input-field">
+                <div class="input-label">
+                    {{ form.title.label}}
+                </div>
+                {{ form.title}}
+            </div>
+            <div class="input-field">
+                <div class="input-label">
+                    {{ form.description.label}}
+                </div>
+                {{ form.description}}
+            </div>
+            <div class="input-fields">
+                <div class="input-field">
+                    <div class="input-label">
+                        {{ form.No_Rooms.label}}
+                    </div>
+                    {{ form.No_Rooms}}
+                </div>
+                <div class="input-field">
+                    <div class="input-label">
+                        {{ form.No_bathrooms.label}}
+                    </div>
+                    {{ form.No_bathrooms}}
+                </div>
+                <div class="input-field">
+                    <div class="input-label">
+                        {{ form.price.label}}
+                    </div>
+                    {{ form.price}}
+                </div>
+                <div class="input-field">
+                    <div class="input-label">
+                        {{ form.property_type.label}}
+                    </div>
+                    {{ form.property_type}}
+                </div>
+                <div class="input-field">
+                    <div class="input-label">
+                        {{ form.location.label}}
+                    </div>
+                    {{ form.location}}
+                </div>
+            </div>
+            <div class="input-field">
+                <div class="input-label">
+                    {{ form.photo.label}}
+                </div>
+                {{ form.photo}}
+            </div>
+            <button type="submit">Add Property</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
