@@ -65,10 +65,10 @@ def  get_uploaded_images():
     path = os.path.join(os.getcwd(),app.config["UPLOAD_FOLDER"] )
     return [file for subdir, dirs, files in os.walk(path) for file in files]
 
-@app.route('/uploads/<filename>')
-def get_image(filename):
-     
-    return send_from_directory(os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER']), filename)
+@app.route('/uploads/<path:photo>')
+def get_image(photo):
+    print(photo)
+    return send_from_directory(os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER']), photo)
 
 
 @app.route('/properties')
